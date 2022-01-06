@@ -56,19 +56,19 @@ public class CityRegisterService {
 							Optional<Street> streetOptional = searchStreet(req);
 							if(streetOptional.isPresent()) {
 								
-								Optional<Long> listAddressStreet = addressDao.findAddress(personOptional.get().getPersonId(), streetOptional.get().getStreetId());
-								if(listAddressStreet.isPresent()) {
+								Optional<Long> addressByStreet = addressDao.findAddress(personOptional.get().getPersonId(), streetOptional.get().getStreetId());
+								if(addressByStreet.isPresent()) {
+									Long id = addressByStreet.get();
+									Optional<Address> addressOptional = addressDao.findById(id);
+									if(addressOptional.isPresent()) {
+									Address address = addressOptional.get();
 									
-//									for(Long streetId: listAddressStreet.get()) {
-////										if(streetOptional.get().getStreetId()==streetId) {
-											infoPersonResponse(response, req);
-////											break;
-////										}
-//									}
+									infoPersonResponse(response, req, true, address);
 									continue;
 								}
 							}
 						}
+					}
 					}
 				} else {
 					Optional<Birth> birthOptional = birthDao.findByBirthNumberAndBirthCertificateDate(req.getBirthCertififcate(), req.getBirthCertificateDate());
@@ -77,13 +77,17 @@ public class CityRegisterService {
 						if(personOptional.isPresent()) {
 							Optional<Street> streetOptional = searchStreet(req);
 							if(streetOptional.isPresent()) {
-								Optional<Long> listAddressStreet = addressDao.findAddress(personOptional.get().getPersonId(), streetOptional.get().getStreetId());
+								Optional<Long> addressByStreet = addressDao.findAddress(personOptional.get().getPersonId(), streetOptional.get().getStreetId());
 								
-								if(listAddressStreet.isPresent()) {
-								
-								
-								infoPersonResponse(response, req);
+								if(addressByStreet.isPresent()) {
+									Long id = addressByStreet.get();
+									Optional<Address> addressOptional = addressDao.findById(id);
+									if(addressOptional.isPresent()) {
+										Address address = addressOptional.get();
+									
+								infoPersonResponse(response, req, true, address);
 								continue;
+									}
 								}
 							}
 						}
@@ -93,22 +97,21 @@ public class CityRegisterService {
 					
 					
 				}
-				PersonResponse resp = new PersonResponse();
-				resp.setFirstName(req.getGivenName());
-				resp.setPatronymic(req.getPatronymic());
-				resp.setRegistered(false);
-				response.add(resp);
+				infoPersonResponse(response, req, false, new Address());
 			} 
 		}
 		
 		return response;
 	}
 
-	private void infoPersonResponse(List<PersonResponse> response, PersonRequest req) {
+	private void infoPersonResponse(List<PersonResponse> response, PersonRequest req, boolean b, Address address) {
 		PersonResponse resp = new PersonResponse();
 		resp.setFirstName(req.getGivenName());
 		resp.setPatronymic(req.getPatronymic());
-		resp.setRegistered(true);
+		resp.setRegistered(b);
+		resp.setEndDate(address.getEndDate());
+		resp.setStartDate(address.getStartDate());
+		resp.setTemporal(address.isTemporal());
 		response.add(resp);
 	}
 
