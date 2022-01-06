@@ -1,5 +1,7 @@
 package city.domain;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +23,8 @@ public class Passport {
 	private String seria;
 	@Column(name="passport_number", nullable=false)
 	private String number;
+	@Column(name="passport_date")
+	private LocalDate passportDate;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Person person;
 	public Long getPassportId() {

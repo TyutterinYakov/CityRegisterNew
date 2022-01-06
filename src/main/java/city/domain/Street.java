@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Street {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="street_code")
 	private Long streetId;
 	@Column(name="street_name", nullable=false)
@@ -23,9 +23,18 @@ public class Street {
 	private String extension;
 	@Column(name="appartment")
 	private String appartment;
-	
-	
-	
+	public Long getStreetId() {
+		return streetId;
+	}
+	public void setStreetId(Long streetId) {
+		this.streetId = streetId;
+	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
 	public String getBuilding() {
 		return building;
 	}
@@ -44,22 +53,6 @@ public class Street {
 	public void setAppartment(String appartment) {
 		this.appartment = appartment;
 	}
-	public Long getStreetId() {
-		return streetId;
-	}
-	public void setStreetId(Long streetId) {
-		this.streetId = streetId;
-	}
-	public String getStreetName() {
-		return streetName;
-	}
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
-	}
-	
-
-	
-	
 	
 	
 }

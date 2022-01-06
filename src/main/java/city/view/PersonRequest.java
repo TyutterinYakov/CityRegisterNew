@@ -18,10 +18,20 @@ public class PersonRequest {
 	@JsonSerialize(converter = LocalDateStringConverter.class)
 	@JsonDeserialize(converter = StringLocalDateConverter.class)
 	private LocalDate dateOfBirth;
-	private Integer streetCode;
+	private String streetName;
 	private String building;
 	private String extension;
 	private String apartment;
+	private String passportNumber;
+	private String passportSeria;
+	private String birthCertififcate;
+	@JsonSerialize(converter = LocalDateStringConverter.class)
+	@JsonDeserialize(converter = StringLocalDateConverter.class)
+	private LocalDate passportDate;
+	@JsonSerialize(converter = LocalDateStringConverter.class)
+	@JsonDeserialize(converter = StringLocalDateConverter.class)
+	private LocalDate birthCertificateDate;
+	
 	public String getSurName() {
 		return surName;
 	}
@@ -64,16 +74,47 @@ public class PersonRequest {
 	public void setApartment(String apartment) {
 		this.apartment = apartment;
 	}
-	public Integer getStreetCode() {
-		return streetCode;
-	}
-	public void setStreetCode(Integer streetCode) {
-		this.streetCode = streetCode;
-	}
 	
+	
+	public String getPassportNumber() {
+		return passportNumber;
+	}
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
+	}
+	public String getPassportSeria() {
+		return passportSeria;
+	}
+	public void setPassportSeria(String passportSeria) {
+		this.passportSeria = passportSeria;
+	}
+	public String getBirthCertififcate() {
+		return birthCertififcate;
+	}
+	public void setBirthCertififcate(String birthCertififcate) {
+		this.birthCertififcate = birthCertififcate;
+	}
+	public LocalDate getPassportDate() {
+		return passportDate;
+	}
+	public void setPassportDate(LocalDate passportDate) {
+		this.passportDate = passportDate;
+	}
+	public LocalDate getBirthCertificateDate() {
+		return birthCertificateDate;
+	}
+	public void setBirthCertificateDate(LocalDate birthCertificateDate) {
+		this.birthCertificateDate = birthCertificateDate;
+	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
 	@Override
 	public String toString() {
-		return surName+" "+givenName+" "+patronymic+" "+dateOfBirth+" "+streetCode+" "+
+		return surName+" "+givenName+" "+patronymic+" "+dateOfBirth+" "+streetName+" "+
 				building+" "+extension+" "+apartment;
 	}
 	

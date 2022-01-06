@@ -1,25 +1,33 @@
 package city.view;
 
 public class PersonResponse {
-	
+	private String firstName;
+	private String patronymic;
 	private boolean registered;
-	private boolean temporal;
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getPatronymic() {
+		return patronymic;
+	}
+	public void setPatronymic(String patronymic) {
+		this.patronymic = patronymic;
+	}
 	public boolean isRegistered() {
 		return registered;
 	}
 	public void setRegistered(boolean registered) {
 		this.registered = registered;
 	}
-	public boolean isTemporal() {
-		return temporal;
-	}
-	public void setTemporal(boolean temporal) {
-		this.temporal = temporal;
-	}
 	
 	@Override
 	public String toString() {
-		return registered+" "+temporal;
+		return registered+" "+firstName+" "+patronymic;
 	}
 	
 }
